@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <title>Crear Producto Forma Antigua</title>
+    </head>
+</html>
+<body>
+    <form method="POST" action="/products/create-category-form-old">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+        <label for="name">Nombre:</label><br>
+        <input type="text" id="name" name="name"><br>
+        <label for="precio">Precio:</label><br>
+        <input type="number" id="price" name="price"><br>
+        <label for="weight">Peso:</label><br>
+        <input type="number" id="weight" name="weight"><br>
+        <label for="description">Descripcion:</label><br>
+        <input type="text" id="description" name="description"><br>
+        <label for="refundable">Reembolsable: [1|0]</label><br>
+        <input type="number" id="refundable" name="refundable"><br>
+        <label for="category_id">Categoria ID:</label><br>
+        <input type="text" id="category_id" name="category_id"><br>
+        <label for="image">Imagen:</label><br>
+        <input type="text" id="image" name="image"><br>
+        <input type="submit" value="Ir">
+    </form>
+</body>

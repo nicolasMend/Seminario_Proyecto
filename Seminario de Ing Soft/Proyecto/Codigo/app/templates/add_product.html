@@ -1,0 +1,56 @@
+{% extends "base_admin.html" %}
+
+{% block panel %}
+
+<article class="tile is-child ">
+    <div class="columns is-mobile has-text-centered">
+        <div class="tag is-medium column is-half is-offset-one-quarter is-warning p-4">
+            <h4><strong>Agregar Producto</strong></h4>
+        </div>
+    </div>
+    <div class="box is-offset-one-quarter is-half pr-5 pl-5 ">
+        <form method="POST" action="{{ url_for('admin.add_product') }}">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+            
+            <label for="name">Nombre:</label><br>
+            <input class="input" type="text" id="name" name="name" placeholder="Nombre">
+
+            <label for="precio">Precio:</label><br>
+            <input class="input" type="number" id="price" name="price" placeholder="Precio">
+
+            <label for="weight">Peso:</label><br>
+            <input class="input" type="number" id="weight" name="weight" step="0.01" min="0" max="50" placeholder="Peso">
+
+            <label for="description">Descripcion:</label><br>
+            <input class="input" type="text" id="description" name="description" placeholder="Descipcion">
+            
+            <label for="refundable">Reembolsable:</label><br>
+            <div class="box notification">
+                <div class="form-check">
+                    <input type="radio" name="refundable" id="opcion1" value="1"> Si <br>
+                </div>
+                <div class="form-check">
+                    <input type="radio" name="refundable" id="opcion2" value="0"> No <br>
+                    </label>
+                </div>
+            </div>
+
+            <label for="category_id">Categoria ID:</label><br>
+            <div class="select is-primary is-fullwidth">
+                <select id="category" name="category">
+                    {% for category in basics.categories %}
+                    <option>{{ category.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <label for="description">Imagen:</label><br>
+            <input class="input" type="text" id="image" name="image" placeholder="Url Imagen">
+            
+            <button class="button is-success m-2">Agregar Producto</button>
+        </form>
+    </div>
+</article>
+
+
+{% endblock %}

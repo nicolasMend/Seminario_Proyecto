@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+
+{% block home %}
+    <section class="hero is-fullheight-with-navbar">
+        <div class="container">
+
+            <!-- Banner -->
+            <div class="row">
+                <div class="col-sm-12">
+                    <img src="{{ url_for('static', filename='images/banner.png') }}" class="img-fluid" alt="Responsive image">
+                </div>
+            </div>
+            <div class="col-sm-12 tag"></div>
+            <!--   Ultimos Productos   -->
+
+            <div class="col-sm-12 tag is-link is-large has-text-centered">
+                <h3>Productos Recientes</h3>
+            </div>
+            <div class="row">
+                {% for product in my_info.products%}
+                <div class="col-sm-4 col-lg-3">
+                    <a href="{{ url_for('products.get_product', id=product.id) }}" class="text-decoration-none text-muted">
+                        <div class="producto">
+                            <div class="row titulo">
+                                <div class="col-12">
+                                    <h4> {{ product.name }} </h4>
+                                </div>
+                            </div>
+                            <div class="row img-producto">
+                                <div class="col-12">
+                                    <img src="{{ product.image }}" alt="Imagen Producto" width="120" height="120">
+                                </div>
+                            </div>
+                            <div class="row precio">
+                                <div class="col-12">
+                                    <span {% if product.price < 100000 %} style="color: red" {% else %} style="color: blue" {% endif %}>{{ "$ {:,.2f}".format(product.price) }}</span></p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    <p style="font-weight: bold;"> Descripción:</p><p class="descripcion"> {{ product.description}} </p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    {% if product.refundable %}
+                                    <h6 style="color: rgb(1, 153, 1);">¡Reembolsable!</h6>
+                                    {% else %}
+                                    <h6 style="color: rgb(183, 1, 1);">Lo sentimos. ¡No reembolsable!</h6>
+                                    {% endif %}
+                                </div>
+                            </div>  
+                        </div>
+                    </a>
+                </div>
+                {% endfor %}
+            </div>
+
+            <!--    Categorias Aleatorias   -->
+
+            <div class="col-sm-12 tag is-primary is-large has-text-centered">
+                <h3>Categorias Recomendadas</h3>
+            </div>
+            <div class="row">
+                {% for category in my_info.random_cat %}
+                    <div class="col-sm-4 col-lg-3">
+                        <a href="{{ url_for('products.get_category_products', id=category.id) }}" class="text-decoration-none text-muted">
+                            <div class="producto">
+                                <div class="row titulo">
+                                    <div class="col-12">
+                                        <h4> {{ category.name }} </h4>
+                                    </div>
+                                </div>
+                                <div class="row img-producto">
+                                    <div class="col-12">
+                                        <img src="{{ category.image }}" alt="Imagen Categoria" width="120" height="120">
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+{% endblock %}

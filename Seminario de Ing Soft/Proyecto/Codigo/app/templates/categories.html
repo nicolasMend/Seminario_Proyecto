@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block home %}
+    <section class="hero is-fullheight-with-navbar">
+        <div class="container">
+
+            <!--    CATEGORIAS   -->
+
+            <div class="col-sm-12 tag is-primary is-large has-text-centered">
+                <h3>CATEGORIAS</h3>
+            </div>
+            <div class="row">
+                {% for category in my_info.categories %}
+                    <div class="col-sm-4 col-lg-3">
+                        <a href="{{ url_for('products.get_category_products', id=category.id) }}" class="text-decoration-none text-muted">
+                            <div class="producto">
+                                <div class="row titulo">
+                                    <div class="col-12">
+                                        <h4> {{ category.name }} </h4>
+                                    </div>
+                                </div>
+                                <div class="row img-producto is-danger">
+                                    <div class="col-12">
+                                        <img src="{{ category.image }}" alt="Imagen Categoria" width="120" height="120">
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+{% endblock %}

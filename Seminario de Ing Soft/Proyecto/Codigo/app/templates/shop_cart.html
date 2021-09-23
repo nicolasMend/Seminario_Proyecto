@@ -1,0 +1,139 @@
+
+{% extends "base.html" %}
+
+{% block content %}
+<section class="hero is-fullheight-with-navbar">
+    <div class="container">
+        <div class="tile is-ancestor">
+            <div class="tile is-vertical is-9">
+                <div class="tile is-parent">
+                    <article class="tile is-child ">
+
+                        <div class="col-sm-12 tag is-primary is-large has-text-centered">
+                            <h3>CARRO DE COMPRAS</h3>
+                        </div>
+
+                        <div class="content box">
+                            <!--Producto-->
+                            {% for order_item, product in my_info.products %}
+                            <div class="tile is-ancestor box">
+                                <div class="tile is-3 is-parent">
+                                    <div class="tile is-child">
+                                        <div class="row">
+                                            <div class="col-12 img-fluid">
+                                                <img src="{{ product.image }}" alt="Imagen Producto" width="180" height="180">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tile is-6 is-parent">
+                                    <div class="tile is-child">
+                                        <div class="row">
+                                            <div class="col-12 ">
+                                                <h3>{{ product.name }}</h4>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-12 ">
+                                                <h5><i class="fa fas fa-dollar-sign text-success"></i>&nbsp;<span class="text-success">{{ " {:,.2f}".format(product.price) }}</span></h5>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--Cantidad, Botones de atualizar y eliminar-->
+                                <div class="tile is-parent is-vertical">
+                                    <!--Form para actualizar cantidad-->
+                                    <form method="POST" action="{{ url_for('order.show_shop_cart') }}">
+                                        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+                                        <input type="hidden" name="order_item_id" id="order_item_id" value="{{ order_item.id }}">
+                                        <div class="m-1">
+                                            <div class="field is-fullwidth">
+                                                <label class="is-white">Cantidad:</label>
+                                                <div class="control">
+                                                    <input class="input font-weight-bold" type="number" name="quantity" value="{{ order_item.order_item_quantity }}" placeholder="">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="m-1">
+                                            <button class="button is-success is-outlined is-fullwidth" name="action" value="update"><i class="fas fa-sync"></i>&nbsp;Actualizar Carro</button>
+                                        </div>
+                                    </form>
+                                    <!--Form para borrar producto-->
+                                    <form method="POST" action="{{ url_for('order.show_shop_cart') }}">
+                                        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+                                        <input type="hidden" name="order_item_id" id="order_item_id" value="{{ order_item.id }}">
+                                        <div class="m-1">
+                                            <button class="button is-danger is-outlined is-fullwidth" name="action" value="erase"><i class="fas fa-trash-alt"></i>&nbsp;Eliminar</button>
+                                        </div>
+                                    </form>
+                                        
+                                </div>
+                                
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </article>
+                </div>
+            </div>
+            <!--Subtotal-->
+            <div class="tile is-parent is-vertical">
+
+                <article class="tile is-child has-text-centered">
+                     
+                    <div class="col-sm-12 tag is-primary is-large has-text-centered">
+                        <h3>PAGO</h3>
+                    </div>
+
+                    <div class="content box">
+                        <div class="content">
+                            <p class="title"><i class="fas fa-cash-register"></i>&nbsp;Orden</p>
+                            <div class="content ">
+                                <table class="table">
+                                    <thead><!--
+                                        <tr>
+                                            <th scope="col">Producto</th>
+                                            <th scope="col">valor</th>
+                                        </tr>-->
+                                    </thead>
+                                    <tbody><!-- Verificar por que no itera con  my_info.values-->
+                                        {% for order_item, product in my_info.products %}
+                                        <tr>
+                                            <td scope="row">{{ product.name }}</th>
+                                            <td>{{ price.order_item_price }}</td>
+                                        </tr>
+                                        {% endfor %}
+                                        <tr>
+                                            <td class="is-size-7 align-middle">Subtotal:</td>
+                                            <td><i class="fa fas fa-dollar-sign text-success"></i>{{ " {:,.2f}".format(my_info.total - my_info.iva) }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="is-size-7 align-middle">IVA:</td>
+                                            <td><i class="fa fas fa-dollar-sign text-success"></i>{{ " {:,.2f}".format(my_info.iva) }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th class="is-size-7 align-middle">Total:</th>
+                                            <th><i class="fa fas fa-dollar-sign text-success"></i>{{ " {:,.2f}".format(my_info.total) }}</th>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <hr class="navbar-divider">
+                        <a class="button is-warning is-hovered is-fullwidth" href="" class="navbar-item">
+                            <span class="icon">
+                                <i class="fas fa-money-bill-wave"></i>
+                            </span>
+                            <span>Pagar
+                            </span>
+                        </a>
+                    </div>
+                </article>
+
+            </div>
+        </div>
+
+    </div>
+</section>
+
+{% endblock %}

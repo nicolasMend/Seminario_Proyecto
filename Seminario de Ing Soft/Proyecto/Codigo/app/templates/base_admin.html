@@ -1,0 +1,56 @@
+
+{% extends "base.html" %}
+
+{% block content %}
+
+<section class="hero is-fullheight-with-navbar">
+    <div class="container">
+        <div class="tile is-ancestor">
+            <div class="tile is-vertical is-3">
+                <div class="tile is-parent">
+                    <article class="tile is-child ">
+
+                        <div class="col-sm-12 tag is-info is-large has-text-centered">
+                            <h3>MENU</h3>
+                        </div>
+
+                        <div class="content box">
+                              
+                            <div class="tile is-ancestor box">
+                                <aside class="menu">
+                                    <ul class="menu-list text-center">
+                                        <a class="button is-link is-outlined m-1" href="{{ url_for('admin.add_product') }}">Agregar Producto</a>
+                                        <a class="button is-link is-outlined m-1">Agregar Categoria</a>
+                                        <a class="button is-link is-outlined m-1">Stock</a>
+                                      </ul>
+                                </aside>
+                            </div>
+                            
+                        </div>
+                    </article>
+                </div>
+            </div>
+            <!--Subtotal-->
+            <div class="tile is-parent is-vertical">
+
+                <article class="tile is-child ">
+                     
+                    <div class="col-sm-12 tag is-info is-large has-text-centered">
+                        <h3>ADMINISTRACIÓN</h3>
+                    </div>
+
+                    <div class="content box">
+                         <!--Contenido-->
+                         {% block panel %}
+                         {% endblock %}
+                    </div>
+
+                </article>
+
+            </div>
+        </div>
+
+    </div>
+</section>
+
+{% endblock %}

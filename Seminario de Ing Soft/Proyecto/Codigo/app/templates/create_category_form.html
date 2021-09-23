@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <title>Crear Categoria</title>
+    </head>
+</html>
+<body>
+    <form method="POST" action="/products/create-category-form">
+        {{ form.csrf_token }}
+        {{ form.name.label }} {{ form.name(size=20) }}
+        <input type="submit" value="Ir">
+    </form>
+</body>

@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <title>Crear Categoria Forma Antigua</title>
+    </head>
+</html>
+<body>
+    <form method="POST" action="/products/create-category-form-old">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+        <label for="name">Nombre:</label>
+        <input type="text" id="name" name="name">
+        <input type="submit" value="Ir">
+    </form>
+</body>

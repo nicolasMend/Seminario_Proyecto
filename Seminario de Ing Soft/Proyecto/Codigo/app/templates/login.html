@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <section class="hero is-link is-fullheight-with-navbar">
+            <div class="hero-body product container has-text-centered">
+                <div class="column is-4 is-offset-4">
+                    <h3 class="title" style="color:white;">Login</h3>
+                    <div class="box">
+                        {% with messages = get_flashed_messages(category_filter=["error"]) %}
+                        {% if messages %}
+                        <div class="notification is-danger">
+                            {{ messages[0] }}
+                        </div>
+                        {% endif %}
+                        {% endwith %}
+
+                        {% with messages = get_flashed_messages(category_filter=["success"]) %}
+                        {% if messages %}
+                        <div class="notification is-success">
+                            {{ messages[0] }}
+                        </div>
+                        {% endif %}
+                        {% endwith %}
+                        <form method="POST" action="{{ url_for('auth.login') }}">
+                            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+                            <div class="field">
+                                <div class="control">
+                                    <input class="input is-large" type="email" name="email" placeholder="Your Email" autofocus="">
+                                </div>
+                            </div>
+
+                            <div class="field">
+                                <div class="control">
+                                    <input class="input is-large" type="password" name="password" placeholder="Your Password">
+                                </div>
+                            </div>
+                            <div class="field">
+                                <label class="checkbox">
+                                    <input id="remember" name="remember" type="checkbox">
+                                    Remember me
+                                </label>
+                            </div>
+                            <button class="button is-block is-warning is-large is-fullwidth">Login</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
